@@ -146,9 +146,6 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Security\mstrautomation.sql" />
-    <Build Include="Security\EDIFICEPROD_MRosas.sql" />
-    <Build Include="Security\RoleMemberships.sql" />
     <Build Include="dbo\Functions\uftReadfileAsTable.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
@@ -193,5 +190,10 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
+    <Build Include="dbo\Stored Procedures\add_requester.sql" />
+    <Build Include="dbo\Stored Procedures\add_server.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MW_AIS_229.publish.xml" />
   </ItemGroup>
 </Project>
