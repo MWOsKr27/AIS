@@ -12,7 +12,7 @@ BEGIN
 	BEGIN
 		UPDATE lu_request
 		SET status_id = 3,
-			step_id = 8,
+			step_id = 11,
 			end_timestamp = CURRENT_TIMESTAMP
 		WHERE request_id = @request_id
 	END

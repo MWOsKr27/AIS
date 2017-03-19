@@ -150,10 +150,6 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="dbo\Stored Procedures\import_data_from_214.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
     <Build Include="dbo\Stored Procedures\finish_success.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
@@ -194,6 +190,6 @@
     <Build Include="dbo\Stored Procedures\add_server.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="MW_AIS_229.publish.xml" />
+    <None Include="MW_AIS_214.publish.xml" />
   </ItemGroup>
 </Project>
