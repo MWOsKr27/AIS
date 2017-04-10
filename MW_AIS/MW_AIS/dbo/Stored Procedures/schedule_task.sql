@@ -33,7 +33,7 @@ BEGIN
 	ELSE IF @step = 10
 		SET @file = 'C:\AIS\Batch\Duplication\start_duplication.bat'
 	ELSE IF @step = 13
-		SET @file = 'C:\AIS\Batch\Ramp\start.bat'
+		SET @file = 'C:\AIS\Batch\Ramp\start_ramp.bat'
 	
 	SET @batch = 'C:\AIS\Batch\create_task.bat ' + @name + ' ' + @time + ' ' + @file
 	EXEC master..xp_CMDShell @batch
