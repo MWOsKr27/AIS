@@ -11,7 +11,7 @@ BEGIN
 
 	IF(SELECT COUNT(1) FROM lu_project WHERE project_id = @project_id) = 0
 	BEGIN
-		INSERT INTO lu_project
+		INSERT INTO lu_project (project_id, project_name)
 		SELECT * FROM CARTRMSVC214.MicroStrategyAutomation.dbo.lu_project WHERE project_id = @project_id
 	END
 

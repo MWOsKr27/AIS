@@ -14,7 +14,7 @@ BEGIN
 	DECLARE @count INT = (SELECT COUNT(1) FROM lu_project WHERE project_id = @project_id)
 
 	IF (@count = 0)
-		INSERT INTO lu_project VALUES (@project_id, @project_name)
+		INSERT INTO lu_project (project_id, project_name) VALUES (@project_id, @project_name)
 
 	DECLARE @request_id NVARCHAR(25) = CASE WHEN @request_type_id = 1 THEN 'I:' ELSE 'R:' END + CONVERT(NVARCHAR(6), @project_id) + ':' + CONVERT(NVARCHAR(16), CURRENT_TIMESTAMP, 21)
 	SELECT @project_name = project_name FROM lu_project WHERE project_id = @project_id
