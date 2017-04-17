@@ -13,10 +13,9 @@ BEGIN
 	DECLARE @step_id INT = NULL
 	DECLARE @flag INT = NULL
 
-	DECLARE @count_in_queue INT = (SELECT COUNT(1) FROM lu_request WHERE status_id = 4)
 	DECLARE @count_in_progress INT = (SELECT COUNT(1) FROM lu_request WHERE status_id = 1)
 	
-	IF (@count_in_queue > 0) AND (@count_in_progress = 0)
+	IF @count_in_progress = 0
 	BEGIN
 		SELECT TOP 1 @request_id = request_id FROM lu_request WHERE status_id = 4 ORDER BY start_timestamp
 		SELECT @request_type_id = request_type_id FROM lu_request WHERE request_id = @request_id
@@ -24,7 +23,7 @@ BEGIN
 		SELECT @flag = flag FROM lu_request WHERE request_id = @request_id
 		
 		IF (@request_type_id = 1 AND @flag = 0)
-			IF @step_id = 1
+			IF @step_id = 0
 				UPDATE lu_request SET step_id = 1 WHERE request_id = @request_id
 			IF @step_id BETWEEN 2 AND 3
 				UPDATE lu_request SET step_id = 2 WHERE request_id = @request_id
@@ -48,7 +47,7 @@ BEGIN
 				UPDATE lu_request SET step_id = 16 WHERE request_id = @request_id
 		ELSE IF (@request_type_id = 1 AND @flag = 1)
 			UPDATE lu_request SET step_id = 9 WHERE request_id = @request_id
-		ELSE
+		ELSE IF (@request_type_id = 2)
 			UPDATE lu_request SET step_id = 13 WHERE request_id = @request_id
 
 		UPDATE lu_request SET status_id = 1 WHERE request_id = @request_id

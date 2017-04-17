@@ -42,11 +42,10 @@ BEGIN
 	DECLARE @request_id NVARCHAR(25) = (SELECT TOP 1 request_id FROM lu_request WHERE status_id = 1 ORDER BY start_timestamp)
 
 	IF @count = 1
-		IF (@step_id = 1 OR @step_id = 9 OR @step_id = 13)
-		BEGIN
-			EXEC set_parameters @request_id
+		EXEC set_parameters @request_id
+
+		IF @step_id = 1
 			EXEC schedule_task @request_id
-		END
 		ELSE IF @step_id = 2
 			EXEC schedule_task @request_id
 		ELSE IF @step_id = 4
@@ -55,6 +54,10 @@ BEGIN
 			EXEC schedule_task @request_id
 		ELSE IF @step_id = 8
 			EXEC schedule_task @request_id
+		ELSE IF @step_id = 9
+			EXEC schedule_task @request_id
 		ELSE IF @step_id = 10
+			EXEC schedule_task @request_id
+		ELSE IF @step_id = 13
 			EXEC schedule_task @request_id
 END;

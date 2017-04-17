@@ -29,12 +29,14 @@ BEGIN
 		SET @param += ' ' + (SELECT wh_name FROM lu_request WHERE request_id = @request_id)
 		SET @param += ' ' + LOWER(@project_name) + 'user'
 		SET @param += ' ' + LOWER(@project_name) + 'user123'
+		SET @param += ' ' + CAST((SELECT step_id FROM lu_request WHERE request_id = @request_id) AS VARCHAR)
 		SET @batch = CASE WHEN @flag = 0 THEN 'C:\AIS\Batch\Implementation\write_DSN_parameters.bat ' ELSE 'C:\AIS\Batch\Duplication\write_DSN_parameters.bat ' END + @param
 		EXEC master..xp_CMDShell @batch
 
 		SET @param = @project_name
 		IF @flag = 0 SET @param += ' ' + CAST((SELECT item_account FROM lu_request WHERE request_id = @request_id) AS VARCHAR)
 		SET @param += ' ' + CAST((SELECT project_id FROM lu_request WHERE request_id = @request_id) AS VARCHAR)
+		SET @param += ' ' + CAST((SELECT step_id FROM lu_request WHERE request_id = @request_id) AS VARCHAR)
 		SET @batch = CASE WHEN @flag = 0 THEN 'C:\AIS\Batch\Implementation\write_duplication_parameters.bat ' ELSE 'C:\AIS\Batch\Duplication\write_duplication_parameters.bat ' END + @param
 		EXEC master..xp_CMDShell @batch
 

@@ -12,7 +12,7 @@ BEGIN
 	IF(SELECT COUNT(1) FROM lu_project WHERE project_id = @project_id) = 0
 	BEGIN
 		INSERT INTO lu_project (project_id, project_name)
-		SELECT * FROM CARTRMSVC214.MicroStrategyAutomation.dbo.lu_project WHERE project_id = @project_id
+		SELECT project_id, project_name FROM CARTRMSVC214.MicroStrategyAutomation.dbo.lu_project WHERE project_id = @project_id
 	END
 
 	BEGIN TRY
@@ -34,7 +34,9 @@ BEGIN
 			wh_name,
 			end_timestamp,
 			request_type_id,
-			flag = CASE WHEN flag IS NOT NULL THEN flag - 1 ELSE 0 END
+			flag = CASE WHEN flag IS NOT NULL THEN flag - 1
+					WHEN request_type_id = 1 THEN 2
+					ELSE 0 END
 		FROM CARTRMSVC214.MicroStrategyAutomation.dbo.lu_request WHERE project_id = @project_id
 	END TRY
 	BEGIN CATCH
